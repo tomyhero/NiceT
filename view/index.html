@@ -1,0 +1,106 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-style-Type" content="text/css" />
+    <link rel="stylesheet" href="/static/css/base.css" type="text/css" />
+    <title>ナイストピック!</title>
+</head>
+<body>
+
+<div id="top">
+   <div id="header">
+      <h1>ナ〜イストピック！</h1>
+      <p>
+       記事なんてどうでも良い。良いタイトルであればそれでいい。 
+      </p>
+      <div id="navi">
+         <ul>
+         <li class="contact"><a href="javascript:alert('ナーイストピック！');">About</a></li>
+         </ul>
+      </div><!-- navi end -->
+   </div><!-- header end -->
+   <div id="menu">
+      <ul>
+      <li><a href="#livedoor">livedoor</a></li>
+      <li><a href="#yahoo">Yahoo</a></li>
+      <li><a href="#goo">Goo</a></li>
+      <li><a href="#infoseek">infoseek</a></li>
+      </ul>
+   </div><!-- menu end -->
+
+
+   <div id="contents">
+    <br />
+    <div id="livedoor" name="livedoor">
+        <h2>livedoor</h2>
+        <ul id="items_livedoor">
+        </ul>
+    </div>
+
+    <div id="yahoo" name="yahoo">
+        <h2>yahoo</h2>
+        <ul id="items_yahoo">
+        </ul>
+    </div>
+
+    <div id="goo" name="goo">
+        <h2>goo</h2>
+        <ul id="items_goo">
+        </ul>
+    </div>
+
+    <div id="infoseek" name="infoseek">
+        <h2>infoseek</h2>
+        <ul id="items_infoseek">
+        </ul>
+    </div>
+
+   </div><!-- contents end -->
+   <div id="totop">
+      <a href="#top">ページのトップへ戻る</a>
+   </div><!-- totop end -->
+   <div id="footer">
+      <address>Copyright &copy; 2011 Tomohiro Teranishi All Rights Reserved.</address>
+   </div><!-- footer end -->
+</div><!-- top end -->
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+
+var names = new Array('livedoor','yahoo','goo','infoseek');
+for(var i = 0 ; i < names.length ; i++){
+    $.ajax({
+        url: "/api/list/" + names[i] + '/',
+        success: function(json){
+            var data = jQuery.parseJSON(json);
+            var items = data.items;
+            var name = data.name;
+            var ul = $('#items_' + name);
+
+            for(var j = 0; j < items.length;j++){
+                ul.append('<li><a href= "javascript:void(0)" onClick="nice(this)" class="niceT" title="'+ items[j].url +'"><span class="label">ナ</span><span class="num">'+ items[j].nice +'</span></a>  <a href="'+ items[j].url + '" target="_blank">' + items[j].title + '</a></li>');
+            }
+
+        }
+    });
+}
+
+function nice(e){
+    var title = e.title;
+    $.ajax({
+        url: "/api/nice/",
+        type: 'POST',
+        data: { url : title },
+        success: function(json){
+            var data = jQuery.parseJSON(json);
+            e.innerHTML = '<span class="label">ナ</span><span class="num">'+ data.nice +'</span>';  
+        }
+    });
+}
+
+
+</script>
+</body>
+</html>
