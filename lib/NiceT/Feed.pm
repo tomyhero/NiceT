@@ -54,10 +54,10 @@ sub get {
 
     }
     elsif($name eq 'yahoo'){
-        for(@$items){
-            my $a= 'http://rd.yahoo.co.jp/rss/l/topics/topics/\*';
-            $_->{url} =~ s/$a//;
-        }
+        #for(@$items){
+            #my $a= 'http://rd.yahoo.co.jp/rss/l/topics/topics/\*';
+            #$_->{url} =~ s/$a//;
+        #}
 
     }
     return $items;
