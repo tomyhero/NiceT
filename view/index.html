@@ -79,8 +79,10 @@ for(var i = 0 ; i < names.length ; i++){
             var name = data.name;
             var ul = $('#items_' + name);
 
+
             for(var j = 0; j < items.length;j++){
-                ul.append('<li><a href= "javascript:void(0)" onClick="nice(this)" class="niceT" title="'+ items[j].url +'"><span class="label">ナ</span><span class="num">'+ items[j].nice +'</span></a>  <a href="'+ items[j].url + '" target="_blank">' + items[j].title + '</a></li>');
+                var hateb = '<a href="http://b.hatena.ne.jp/entry/' + items[j].url + '">' + '<img border="0" src="http://b.hatena.ne.jp/entry/image/large/' + items[j].url + '" /></a>';
+                ul.append('<li><a href= "javascript:void(0)" onClick="nice(this)" class="niceT" title="'+ items[j].url +'"><span class="label">ナ</span><span class="num">'+ items[j].nice +'</span></a>  <a href="'+ items[j].url + '" target="_blank">' + items[j].title + '</a>  ' + hateb + '</li>');
             }
 
         }
