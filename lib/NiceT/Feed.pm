@@ -3,6 +3,7 @@ use warnings;
 use strict;
 use XML::Feed;
 use URI;
+use URI::QueryParam;
 
 my $map = {
     livedoor => {
@@ -29,7 +30,37 @@ sub new {
 sub get {
     my $self = shift;
     my $name = shift;
-    $self->parse($map->{$name}{url});
+    my $items =$self->parse($map->{$name}{url});
+
+    if($name eq 'infoseek'){
+
+        for(@$items){
+            my $xxx = URI->new($_->{url});
+            my $url = $xxx->query_param('rd');
+            $url =~ s/\?.+//;
+            $_->{url} = $url;
+        }
+    }
+    elsif($name eq 'livedoor'){
+        #for(@$items){
+            #$_->{url} =~ s/topics/article/;
+        #}
+
+    }
+    elsif($name eq 'goo'){
+        for(@$items){
+            $_->{url} =~ s/\?.+//;
+        }
+
+    }
+    elsif($name eq 'yahoo'){
+        for(@$items){
+            my $a= 'http://rd.yahoo.co.jp/rss/l/topics/topics/\*';
+            $_->{url} =~ s/$a//;
+        }
+
+    }
+    return $items;
 }
 
 sub parse {
