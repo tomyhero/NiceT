@@ -55,12 +55,6 @@
         </ul>
     </div>
 
-<hr />
-<ul>
-<li>ツイタ/はてぶ数は記事本体ではなくランディングページ(もっと見るリンクがあるページ)が対象</li>
-<li>livedoor以外は、rssからの流入を取得対応URLでしたので必要に応じて正規化している</li>
-<li>yahooはトピックスの記事毎にurlを変更するのではなくカテゴリのtopに飛ばしているので、ツイタ/はてぶ数は対象記事数ではない</li>
-</ul>
 
    </div><!-- contents end -->
    <div id="totop">
@@ -90,7 +84,7 @@ for(var i = 0 ; i < names.length ; i++){
             for(var j = 0; j < items.length;j++){
                 var tweet = '<a href="http://tweetbuzz.jp/redirect?url='+items[j].url +'" target="_blank"><img src="http://tools.tweetbuzz.jp/imgcount?url='+ items[j].url +'" style="border: none;" /></a>';
                 var hateb = '<a href="http://b.hatena.ne.jp/entry/' + items[j].url + '" target="_blank">' + '<img border="0" src="http://b.hatena.ne.jp/entry/image/large/' + items[j].url + '" /></a>';
-                ul.append('<li><a href= "javascript:void(0)" onClick="nice(this)" class="niceT" title="'+ items[j].url +'"><span class="label">ナ</span><span class="num">'+ items[j].nice +'</span></a>  <a href="'+ items[j].url + '" target="_blank">' + items[j].title + '</a>  '+ tweet + '  ' + hateb + '</li>');
+                ul.append('<li><a href= "javascript:void(0)" onClick="nice(this)" class="niceT" title="'+ items[j].url +'"><span class="label">ナ</span><span class="num">'+ items[j].nice +'</span></a>  <a href="'+ items[j].url + '" target="_blank">' + items[j].title + '</a>  '+ hateb + '</li>');
             }
 
         }
